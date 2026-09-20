@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,8 +19,8 @@ const IdeaPage = async () => {
             </h1>
 
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-400 sm:text-lg">
-              Explore innovative startup ideas, discover new opportunities,
-              and get inspired by creative entrepreneurs from the community.
+              Explore innovative startup ideas, discover new opportunities, and
+              get inspired by creative entrepreneurs from the community.
             </p>
           </div>
         </div>
@@ -36,9 +35,7 @@ const IdeaPage = async () => {
             className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
           />
 
-          <select
-            className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 dark:border-gray-700 dark:bg-gray-950 dark:text-white md:w-56"
-          >
+          <select className="rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 dark:border-gray-700 dark:bg-gray-950 dark:text-white md:w-56">
             <option value="">All Categories</option>
             <option value="Tech">Tech</option>
             <option value="AI">AI</option>
@@ -112,19 +109,18 @@ const IdeaPage = async () => {
                 )}
 
                 {/* Tags */}
-                {idea.tags?.length > 0 && (
+                {Array.isArray(idea.tags) && idea.tags.length > 0 && (
                   <div className="mt-4 flex flex-wrap gap-2">
                     {idea.tags.slice(0, 3).map((tag, index) => (
                       <span
                         key={index}
                         className="rounded-md bg-[#4F46E5]/10 px-2.5 py-1 text-xs font-medium text-[#4F46E5]"
                       >
-                        #{tag.trim()}
+                        #{tag}
                       </span>
                     ))}
                   </div>
                 )}
-
                 {/* Budget & Audience */}
                 <div className="mt-5 grid grid-cols-2 gap-3 border-t border-gray-100 pt-4 dark:border-gray-800">
                   {/* Budget */}
@@ -135,9 +131,7 @@ const IdeaPage = async () => {
 
                     <p className="mt-1 text-sm font-semibold text-[#0F172A] dark:text-gray-200">
                       {idea.estimatedBudget
-                        ? `$${Number(
-                            idea.estimatedBudget
-                          ).toLocaleString()}`
+                        ? `$${Number(idea.estimatedBudget).toLocaleString()}`
                         : "Not specified"}
                     </p>
                   </div>
