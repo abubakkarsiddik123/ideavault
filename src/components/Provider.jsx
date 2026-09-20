@@ -7,7 +7,6 @@ const Providers = ({ children }) => {
     <ThemeProvider
       attribute="class"
       defaultTheme="light"
-      forcedTheme={undefined}
       enableSystem={false}
       disableTransitionOnChange
     >
