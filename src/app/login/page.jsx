@@ -10,23 +10,40 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import {  useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const handleSubmit = (e) => {
+  const handleGoogleSignin = async () => {
+        await authClient.signIn.social({
+          provider: "google",
+          callbackURL: "/",
+        });
+      };
+  const router=useRouter()
+  const onSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
+    const user = Object.fromEntries(formData.entries());
+    console.log(user);
 
-    const data = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+    });
 
-    console.log("Login Data:", data);
-  };
+ if (error) {
+      toast.error(error.message || "Loging  failed");
+      return;
+    }
 
-  const handleGoogleLogin = () => {
-    console.log("Google Login");
+    if (data) {
+      toast.success("Login successful!");
+      router.push("/");
+    }
+
+   
   };
 
   return (
@@ -45,7 +62,7 @@ const LoginPage = () => {
 
         {/* Login Card */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 dark:border-gray-800 dark:bg-gray-900">
-          <Form className="flex w-full flex-col gap-5" onSubmit={handleSubmit}>
+          <Form className="flex w-full flex-col gap-5" onSubmit={onSubmit}>
             {/* Email */}
             <TextField
               isRequired
@@ -109,10 +126,10 @@ const LoginPage = () => {
 
           {/* Google Login */}
           <Button
+          onClick={handleGoogleSignin}
             type="button"
             variant="secondary"
             className="h-11 w-full font-semibold"
-            onPress={handleGoogleLogin}
           >
             <FcGoogle className="text-xl" />
             Continue with Google

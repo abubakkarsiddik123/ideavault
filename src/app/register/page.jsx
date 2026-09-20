@@ -17,6 +17,12 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {
+  const handleGoogleSignin = async () => {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    };
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -152,6 +158,7 @@ const RegisterPage = () => {
 
           {/* Google Register */}
           <Button
+            onClick={handleGoogleSignin}
             type="button"
             variant="secondary"
             className="h-11 w-full font-semibold"
