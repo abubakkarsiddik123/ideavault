@@ -1,30 +1,38 @@
-
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+
 const AddIdeaPage = () => {
-  const onSubmit =async (e) => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  // console.log(user, "user data");
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const ideaData = Object.fromEntries(formData.entries());
+    const ideasdata = Object.fromEntries(formData.entries());
 
-    console.log(ideaData,"ideaData");
+    const ideaData = {
+  ...ideasdata,
+  userId: user.id,
+};
 
-    const res = await fetch("http://localhost:8080/idea",{
-      method:"POST",
-      headers:{
-        'content-type':"application/json"
+console.log(ideaData,"ideaData");
+
+    const res = await fetch("http://localhost:8080/idea", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(ideaData)
-    })
+      body: JSON.stringify(ideaData),
+    });
     const data = await res.json();
-    console.log(data,"add-idea data");
+    console.log(data, "add-idea data");
   };
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10 dark:bg-gray-950 sm:px-6">
       <div className="mx-auto max-w-4xl">
-
         {/* Header */}
         <div className="mb-8 text-center">
           <span className="inline-block rounded-full bg-[#FBBF24] px-4 py-1.5 text-sm font-semibold text-[#0F172A]">
@@ -36,8 +44,8 @@ const AddIdeaPage = () => {
           </h1>
 
           <p className="mx-auto mt-3 max-w-2xl text-gray-600 dark:text-gray-400">
-            Share your innovative startup idea with the IdeaVault community
-            and inspire others.
+            Share your innovative startup idea with the IdeaVault community and
+            inspire others.
           </p>
         </div>
 
@@ -47,7 +55,6 @@ const AddIdeaPage = () => {
           className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-8"
         >
           <div className="space-y-6">
-
             {/* Idea Title */}
             <div>
               <label className="mb-2 block text-sm font-semibold text-gray-800 dark:text-gray-200">
@@ -78,7 +85,6 @@ const AddIdeaPage = () => {
 
             {/* Category + Budget */}
             <div className="grid gap-6 md:grid-cols-2">
-
               {/* Category */}
               <div>
                 <label className="mb-2 block text-sm font-semibold text-gray-800 dark:text-gray-200">
@@ -207,7 +213,6 @@ const AddIdeaPage = () => {
 
             {/* Buttons */}
             <div className="flex flex-col gap-3 border-t border-gray-200 pt-6 sm:flex-row sm:justify-end dark:border-gray-800">
-
               <button
                 type="reset"
                 className="rounded-lg border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
@@ -221,7 +226,6 @@ const AddIdeaPage = () => {
               >
                 Publish Idea
               </button>
-
             </div>
           </div>
         </form>
@@ -231,4 +235,3 @@ const AddIdeaPage = () => {
 };
 
 export default AddIdeaPage;
-

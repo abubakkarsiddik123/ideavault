@@ -17,12 +17,7 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {
-  const handleGoogleSignin = async () => {
-      await authClient.signIn.social({
-        provider: "google",
-        callbackURL: "/",
-      });
-    };
+ 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -46,6 +41,12 @@ const RegisterPage = () => {
       return;
     }
   };
+   const handleGoogleSignin = async () => {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    };
 
   return (
     <main className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-gray-50 px-4 py-10 dark:bg-gray-950">

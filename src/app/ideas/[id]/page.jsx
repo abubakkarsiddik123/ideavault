@@ -10,12 +10,22 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import CommentForm from "@/components/CommentForm";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
+   const {token}=await auth.api.getToken({
+    headers:await headers()
+   })
+  
+   console.log(token,"token");
+  
 
   const res = await fetch(`http://localhost:8080/idea/${id}`, {
-    cache: "no-store",
+   headers:{
+      authorization:`Bearer ${token}`
+    }
   });
 
   if (!res.ok) {
@@ -24,7 +34,6 @@ const IdeaDetailsPage = async ({ params }) => {
 
   const data = await res.json();
 
-  // যদি API { data: {...} } return করে
   const idea = data.data || data;
 
   return (
