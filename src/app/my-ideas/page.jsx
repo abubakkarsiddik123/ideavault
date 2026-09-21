@@ -1,3 +1,4 @@
+import { MyIdeasDeleteAlert } from "@/components/MyIdeasDeleteAlert";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
@@ -147,13 +148,7 @@ const MyIdeasPage = async () => {
                         Edit
                       </Link>
 
-                      <button
-                        type="button"
-                        className="flex items-center justify-center gap-2 rounded-xl bg-red-50 px-3 py-2.5 text-sm font-semibold text-red-600 transition-all hover:bg-red-500 hover:text-white dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white"
-                      >
-                        <FaTrash />
-                        Delete
-                      </button>
+                      <MyIdeasDeleteAlert id={idea._id} />
                     </div>
                   </div>
                 </article>
