@@ -1,3 +1,4 @@
+import EditIdeaModal from "@/components/EditMyIdeaForm";
 import { MyIdeasDeleteAlert } from "@/components/MyIdeasDeleteAlert";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -7,9 +8,6 @@ import Link from "next/link";
 import {
   FaPlus,
   FaLightbulb,
-  FaEdit,
-  FaTrash,
-  FaEye,
   FaArrowRight,
 } from "react-icons/fa";
 
@@ -38,11 +36,6 @@ const MyIdeasPage = async () => {
 
           <div className="relative flex flex-col justify-between gap-6 md:flex-row md:items-center">
             <div>
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-sm font-semibold text-primary">
-                <FaLightbulb />
-                Your Ideas
-              </div>
-
               <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
                 My Ideas
               </h1>
@@ -131,22 +124,8 @@ const MyIdeasPage = async () => {
                     </p>
 
                     {/* Actions */}
-                    <div className="mt-5 grid grid-cols-3 gap-2">
-                      <Link
-                        href={`/ideas/${idea._id}`}
-                        className="group/btn flex items-center justify-center gap-2 rounded-xl bg-primary px-3 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
-                      >
-                        <FaEye />
-                        View
-                      </Link>
-
-                      <Link
-                        href={`/edit-idea/${idea._id}`}
-                        className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:border-primary hover:bg-primary/5 hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary dark:hover:text-primary"
-                      >
-                        <FaEdit />
-                        Edit
-                      </Link>
+                    <div className="mt-5 flex items-center justify-end gap-5">
+                      <EditIdeaModal idea={idea}/>
 
                       <MyIdeasDeleteAlert id={idea._id} />
                     </div>

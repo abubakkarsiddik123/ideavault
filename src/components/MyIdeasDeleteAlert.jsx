@@ -30,13 +30,16 @@ export function MyIdeasDeleteAlert({ id }) {
   return (
     <AlertDialog>
       <AlertDialog.Trigger>
-        <button
-          type="button"
-          className="flex items-center justify-center gap-2 rounded-xl bg-red-50 px-3 py-2.5 text-sm font-semibold text-red-600 transition-all hover:bg-red-500 hover:text-white dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white"
-        >
-          <FaTrash />
-          Delete
-        </button>
+       <button
+  type="button"
+  className="group flex h-10 items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 font-medium text-red-600 transition-all hover:border-red-300 hover:bg-red-600 hover:text-white dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-600 dark:hover:text-white"
+>
+  <FaTrash
+    size={17}
+    className="transition-transform duration-200 group-hover:scale-110"
+  />
+  Delete
+</button>
       </AlertDialog.Trigger>
 
       <AlertDialog.Backdrop>

@@ -13,11 +13,11 @@ const AddIdeaPage = () => {
     const ideasdata = Object.fromEntries(formData.entries());
 
     const ideaData = {
-  ...ideasdata,
-  userId: user.id,
-};
+      ...ideasdata,
+      userId: user.id,
+    };
 
-console.log(ideaData,"ideaData");
+    console.log(ideaData, "ideaData");
 
     const res = await fetch("http://localhost:8080/idea", {
       method: "POST",
