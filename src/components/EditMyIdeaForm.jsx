@@ -104,7 +104,7 @@ export default function EditMyIdeaForm({ idea }) {
 
                     <TextArea
                       name="shortDescription"
-                      defaultValue={shortDescription}
+                      defaultValue={shortDescription||""}
                       placeholder="Write a short description"
                       className="min-h-14 w-full rounded-lg border border-gray-400 px-3 py-3"
                     />

@@ -18,5 +18,6 @@ export const config = {
     "/my-ideas",
     "/idea/:path",
     "/profile",
+    "/my-interactions"
   ],
 };
