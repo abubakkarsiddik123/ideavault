@@ -44,7 +44,7 @@ await authClient.signOut();
 
   return (
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white text-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:text-white">
-      <div className="mx-auto flex min-h-[68px] items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
+      <div className=" mx-auto flex min-h-[68px] items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" onClick={closeMenu} className="shrink-0">
           <Image
