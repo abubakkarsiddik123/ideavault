@@ -16,17 +16,16 @@ import Comment from "@/components/Comments";
 
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
-   const {token}=await auth.api.getToken({
-    headers:await headers()
-   })
-  
-   console.log(token,"token");
-  
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  console.log(token, "token");
 
   const res = await fetch(`http://localhost:8080/idea/${id}`, {
-   headers:{
-      authorization:`Bearer ${token}`
-    }
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
   });
 
   if (!res.ok) {
@@ -53,14 +52,22 @@ const IdeaDetailsPage = async ({ params }) => {
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
           {/* Image */}
           <div className="relative h-72 w-full overflow-hidden bg-gray-100 md:h-96 dark:bg-gray-800">
-            <Image
-              src={idea.imageURL}
-              alt={idea.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 1200px"
-            />
+            <div className="relative h-72 w-full overflow-hidden bg-gray-100 md:h-96 dark:bg-gray-800">
+              {idea.imageURL ? (
+                <Image
+                  src={idea.imageURL}
+                  alt={idea.title || "Startup idea"}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <span className="text-sm text-gray-400">
+                    No image available
+                  </span>
+                </div>
+              )}
+            </div>
 
             {/* Category */}
             <div className="absolute left-5 top-5">
@@ -204,30 +211,6 @@ const IdeaDetailsPage = async ({ params }) => {
                 </p>
               </div>
             </section>
-
-            {/* Tags */}
-            <section className="mt-10">
-              <div className="flex items-center gap-2">
-                <FaTag className="text-primary" />
-
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Tags
-                </h2>
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {idea.tags?.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            {/* Comment Button */}
             {/* Comments Section */}
             <section
               id="comments"
