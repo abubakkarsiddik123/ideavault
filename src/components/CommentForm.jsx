@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const CommentForm = ({ ideaId }) => {
+  const router=useRouter();
   const [comment, setComment] = useState("");
 
   const handleSubmit = async (e) => {
@@ -15,42 +17,38 @@ const CommentForm = ({ ideaId }) => {
       return;
     }
 
-    try {
-      const { data } = await authClient.token();
-      const token = data?.token;
+    const { data } = await authClient.token();
+    const token = data?.token;
 
-      if (!token) {
-        toast.error("Authentication token not found");
-        return;
-      }
-
-      const commentData = {
-        ideaId,
-        comment: comment.trim(),
-      };
-
-      const res = await fetch("http://localhost:8080/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(commentData),
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        toast.error(result.message || "Failed to add comment");
-        return;
-      }
-
-      toast.success("Comment added successfully");
-      setComment("");
-    } catch (error) {
-      console.error("Comment error:", error);
-      toast.error("Something went wrong");
+    if (!token) {
+      toast.error("Authentication token not found");
+      return;
     }
+
+    const commentData = {
+      ideaId,
+      comment: comment.trim(),
+    };
+
+    const res = await fetch("http://localhost:8080/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(commentData),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      toast.error(result.message || "Failed to add comment");
+      return;
+    }
+
+    toast.success("Comment added successfully");
+    setComment("");
+    router.refresh();
   };
 
   return (

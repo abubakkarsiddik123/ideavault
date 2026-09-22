@@ -12,6 +12,7 @@ import Image from "next/image";
 import CommentForm from "@/components/CommentForm";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import Comment from "@/components/Comments";
 
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -248,13 +249,7 @@ const IdeaDetailsPage = async ({ params }) => {
 
               {/* Comments will be displayed here later */}
               <div className="mt-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Comments
-                </h3>
-
-                <p className="mt-3 text-gray-500 dark:text-gray-400">
-                  No comments yet. Be the first to share your thoughts!
-                </p>
+                <Comment ideaId={idea._id} />
               </div>
             </section>
           </div>
