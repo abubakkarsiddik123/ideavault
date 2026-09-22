@@ -5,12 +5,6 @@ import { Avatar } from "@heroui/react";
 import { FaUser } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 
-export const metadata = {
-  title: "Profile | IdeaVault",
-  description:
-    "View and manage your IdeaVault profile.",
-};
-
 const ProfilePage = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -68,7 +62,7 @@ const ProfilePage = () => {
                 />
 
                 <Avatar.Fallback>
-                  {user?.name?.charAt(0)?.toUpperCase()}
+                  {user?.name?.charAt(0) || "U"}
                 </Avatar.Fallback>
               </Avatar>
 
