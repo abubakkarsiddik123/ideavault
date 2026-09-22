@@ -17,7 +17,7 @@ const slides = [
     description:
       "Explore innovative startup ideas, discover new opportunities, and get inspired by creative entrepreneurs.",
     image:
-      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=80",
+      "https://i.ibb.co.com/PGFFNz3K/photo1.jpg",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const slides = [
     description:
       "Share your startup idea with the community, get valuable feedback, and take the first step toward building it.",
     image:
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
+      "https://i.ibb.co.com/219FG8N4/photo3.jpg",
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const slides = [
     description:
       "Connect with creative minds, discuss new concepts, validate ideas, and build something meaningful together.",
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80",
+      "https://i.ibb.co.com/fK71hz1/photo3.jpg",
   },
 ];
 

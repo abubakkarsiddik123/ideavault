@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "All Ideas | IdeaVault",
+  description:
+    "Explore startup ideas shared by the IdeaVault community.",
+};
+
 const IdeaPage = async ({ searchParams }) => {
   const params = await searchParams;
 
@@ -23,7 +29,7 @@ const IdeaPage = async ({ searchParams }) => {
     `http://localhost:8080/idea${queryString ? `?${queryString}` : ""}`,
     {
       cache: "no-store",
-    }
+    },
   );
 
   const data = await res.json();
@@ -39,8 +45,8 @@ const IdeaPage = async ({ searchParams }) => {
             </h1>
 
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-400 sm:text-lg">
-              Explore innovative startup ideas, discover new opportunities,
-              and get inspired by creative entrepreneurs from the community.
+              Explore innovative startup ideas, discover new opportunities, and
+              get inspired by creative entrepreneurs from the community.
             </p>
           </div>
         </div>
@@ -110,14 +116,20 @@ const IdeaPage = async ({ searchParams }) => {
                 key={idea._id}
                 className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900"
               >
-                <div className="relative h-52 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                  {idea.imageURL && (
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  {idea.imageURL ? (
                     <Image
                       src={idea.imageURL}
                       alt={idea.title || "Startup idea"}
                       fill
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
+                  ) : (
+                    <div className="flex h-full items-center justify-center">
+                      <span className="text-sm text-gray-400">
+                        No image available
+                      </span>
+                    </div>
                   )}
                 </div>
 
@@ -159,9 +171,7 @@ const IdeaPage = async ({ searchParams }) => {
 
                       <p className="mt-1 text-sm font-semibold text-[#0F172A] dark:text-gray-200">
                         {idea.estimatedBudget
-                          ? `$${Number(
-                              idea.estimatedBudget
-                            ).toLocaleString()}`
+                          ? `$${Number(idea.estimatedBudget).toLocaleString()}`
                           : "Not specified"}
                       </p>
                     </div>

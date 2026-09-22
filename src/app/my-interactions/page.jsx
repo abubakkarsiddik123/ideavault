@@ -3,6 +3,12 @@ import { headers } from "next/headers";
 import { FaRegCommentDots } from "react-icons/fa";
 import { FiMessageCircle } from "react-icons/fi";
 
+export const metadata = {
+  title: "My Interactions | IdeaVault",
+  description:
+    "View your comments and interactions on IdeaVault.",
+};
+
 const MyInteractionPage = async () => {
   const tokenResult = await auth.api.getToken({
     headers: await headers(),

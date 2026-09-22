@@ -4,12 +4,13 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import { FaPlus, FaLightbulb, FaArrowRight } from "react-icons/fa";
 
-import {
-  FaPlus,
-  FaLightbulb,
-  FaArrowRight,
-} from "react-icons/fa";
+export const metadata = {
+  title: "My Ideas | IdeaVault",
+  description:
+    "Manage and edit your startup ideas.",
+};
 
 const MyIdeasPage = async () => {
   const { token } = await auth.api.getToken({
@@ -101,15 +102,20 @@ const MyIdeasPage = async () => {
                 >
                   {/* Image */}
 
-                  <div className="relative h-56 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    {idea.imageUrl && (
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+                    {idea.imageURL ? (
                       <Image
-                        src={idea.imageUrl}
-                        alt={idea.title}
+                        src={idea.imageURL}
+                        alt={idea.title || "Startup idea"}
                         fill
                         className="object-cover transition duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
+                    ) : (
+                      <div className="flex h-full items-center justify-center">
+                        <span className="text-sm text-gray-400">
+                          No image available
+                        </span>
+                      </div>
                     )}
                   </div>
 
@@ -125,7 +131,7 @@ const MyIdeasPage = async () => {
 
                     {/* Actions */}
                     <div className="mt-5 flex items-center justify-end gap-5">
-                      <EditIdeaModal idea={idea}/>
+                      <EditIdeaModal idea={idea} />
 
                       <MyIdeasDeleteAlert id={idea._id} />
                     </div>

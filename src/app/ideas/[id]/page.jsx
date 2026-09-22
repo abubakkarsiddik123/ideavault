@@ -14,6 +14,39 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Comment from "@/components/Comments";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const tokenResult = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const token = tokenResult?.token;
+
+  const res = await fetch(
+    `http://localhost:8080/idea/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) {
+    return {
+      title: "Idea Details | IdeaVault",
+    };
+  }
+
+  const idea = await res.json();
+
+  return {
+    title: `${idea.title} | IdeaVault`,
+    description: idea.shortDescription,
+  };
+}
+
 const IdeaDetailsPage = async ({ params }) => {
   const { id } = await params;
   const { token } = await auth.api.getToken({
@@ -52,24 +85,21 @@ const IdeaDetailsPage = async ({ params }) => {
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
           {/* Image */}
           <div className="relative h-72 w-full overflow-hidden bg-gray-100 md:h-96 dark:bg-gray-800">
-            <div className="relative h-72 w-full overflow-hidden bg-gray-100 md:h-96 dark:bg-gray-800">
-              {idea.imageURL ? (
-                <Image
-                  src={idea.imageURL}
-                  alt={idea.title || "Startup idea"}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <span className="text-sm text-gray-400">
-                    No image available
-                  </span>
-                </div>
-              )}
-            </div>
+            {idea.imageURL ? (
+              <Image
+                src={idea.imageURL}
+                alt={idea.title || "Startup idea"}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <span className="text-sm text-gray-400">
+                  No image available
+                </span>
+              </div>
+            )}
 
-            {/* Category */}
             <div className="absolute left-5 top-5">
               <span className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow">
                 {idea.category}
