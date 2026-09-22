@@ -1,68 +1,83 @@
-import { FaPaperPlane } from "react-icons/fa";
+"use client";
 
-const CommentForm = () => {
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
+
+const CommentForm = ({ ideaId }) => {
+  const [comment, setComment] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!comment.trim()) {
+      toast.error("Please write a comment");
+      return;
+    }
+
+    try {
+      const { data } = await authClient.token();
+      const token = data?.token;
+
+      if (!token) {
+        toast.error("Authentication token not found");
+        return;
+      }
+
+      const commentData = {
+        ideaId,
+        comment: comment.trim(),
+      };
+
+      const res = await fetch("http://localhost:8080/comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(commentData),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.message || "Failed to add comment");
+        return;
+      }
+
+      toast.success("Comment added successfully");
+      setComment("");
+    } catch (error) {
+      console.error("Comment error:", error);
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
-    <form className="mt-6">
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-
-        {/* Textarea */}
+    <form onSubmit={handleSubmit} className="mt-6">
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
         <div className="p-5">
           <textarea
+            name="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             placeholder="Share your thoughts about this idea..."
             rows={5}
-            className="
-              w-full
-              resize-none
-              rounded-xl
-              border
-              border-gray-200
-              bg-gray-50
-              p-4
-              text-gray-900
-              outline-none
-              transition
-              placeholder:text-gray-400
-              focus:border-blue-500
-              focus:ring-2
-              focus:ring-blue-500/20
-              dark:border-gray-700
-              dark:bg-gray-950
-              dark:text-white
-              dark:placeholder:text-gray-500
-            "
+            className="w-full resize-none rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
           />
         </div>
 
-        {/* Bottom */}
-        <div className="flex flex-col gap-3 border-t border-gray-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between dark:border-gray-800">
-
+        <div className="flex items-center justify-between border-t border-gray-200 px-5 py-3 dark:border-gray-800">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Be respectful and constructive.
+            Share your thoughts respectfully.
           </p>
 
           <button
             type="submit"
-            className="
-              inline-flex
-              items-center
-              justify-center
-              gap-2
-              rounded-lg
-              bg-blue-600
-              px-5
-              py-2.5
-              font-semibold
-              text-white
-              transition
-              hover:bg-blue-700
-              dark:bg-blue-500
-              dark:hover:bg-blue-600
-            "
+            className="inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700"
           >
-            <FaPaperPlane className="text-sm" />
             Comment
           </button>
-
         </div>
       </div>
     </form>
@@ -70,6 +85,3 @@ const CommentForm = () => {
 };
 
 export default CommentForm;
-
-
-

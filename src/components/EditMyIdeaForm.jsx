@@ -55,15 +55,13 @@ export default function EditMyIdeaForm({ idea }) {
   return (
     <Modal>
       {/* Edit Button */}
-<Button
-  className="group flex h-10 items-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-3 font-medium text-indigo-600 transition-all hover:border-indigo-300 hover:bg-indigo-600 hover:text-white dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-400 dark:hover:bg-indigo-600 dark:hover:text-white"
->
-  <BiEdit
-    size={17}
-    className="transition-transform duration-200 group-hover:scale-110"
-  />
-  Edit
-</Button>
+      <Button className="group flex h-10 items-center gap-2 rounded-lg border border-indigo-200 bg-indigo-50 px-3 font-medium text-indigo-600 transition-all hover:border-indigo-300 hover:bg-indigo-600 hover:text-white dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-400 dark:hover:bg-indigo-600 dark:hover:text-white">
+        <BiEdit
+          size={17}
+          className="transition-transform duration-200 group-hover:scale-110"
+        />
+        Edit
+      </Button>
 
       <Modal.Backdrop>
         <Modal.Container placement="auto">
