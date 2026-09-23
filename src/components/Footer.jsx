@@ -50,16 +50,6 @@ const Footer = () => {
                   Explore Ideas
                 </Link>
               </li>
-
-              <li>
-                <Link
-                  href="/categories"
-                  className="text-gray-600 transition hover:text-blue-600 dark:text-gray-400"
-                >
-                  Categories
-                </Link>
-              </li>
-
               <li>
                 <Link
                   href="/add-idea"
@@ -160,19 +150,9 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-5">
-              <Link
-                href="/privacy"
-                className="text-gray-500 transition hover:text-blue-600 dark:text-gray-400"
-              >
-                Privacy
-              </Link>
+              <span className="text-gray-500 dark:text-gray-400">Privacy</span>
 
-              <Link
-                href="/terms"
-                className="text-gray-500 transition hover:text-blue-600 dark:text-gray-400"
-              >
-                Terms
-              </Link>
+              <span className="text-gray-500 dark:text-gray-400">Terms</span>
             </div>
           </div>
         </div>
