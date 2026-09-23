@@ -69,7 +69,7 @@ const LoginPage = () => {
 
         {/* Login Card */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 dark:border-gray-800 dark:bg-gray-900">
-          <Form className="flex w-full flex-col gap-5" onSubmit={onSubmit}>
+          <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
             {/* Email */}
             <TextField
               isRequired
@@ -111,6 +111,10 @@ const LoginPage = () => {
 
               <FieldError />
             </TextField>
+            
+          <p className="-mt-3 text-end text-sm text-blue-600 dark:text-blue-400">
+            Forgot password?
+          </p>
 
             {/* Login Button */}
             <Button

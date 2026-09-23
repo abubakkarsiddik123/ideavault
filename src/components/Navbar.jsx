@@ -83,27 +83,30 @@ const Navbar = () => {
           >
             Ideas
           </Link>
+          {user && (
+            <>
+              <Link
+                href="/add-idea"
+                className="text-sm font-medium transition hover:text-primary dark:text-white"
+              >
+                Add Idea
+              </Link>
 
-          <Link
-            href="/add-idea"
-            className="text-sm font-medium transition hover:text-primary dark:text-white"
-          >
-            Add Idea
-          </Link>
+              <Link
+                href="/my-ideas"
+                className="text-sm font-medium transition hover:text-primary dark:text-white"
+              >
+                My Ideas
+              </Link>
 
-          <Link
-            href="/my-ideas"
-            className="text-sm font-medium transition hover:text-primary dark:text-white"
-          >
-            My Ideas
-          </Link>
-
-          <Link
-            href="/my-interactions"
-            className="text-sm font-medium transition hover:text-primary dark:text-white"
-          >
-            My Interactions
-          </Link>
+              <Link
+                href="/my-interactions"
+                className="text-sm font-medium transition hover:text-primary dark:text-white"
+              >
+                My Interactions
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Right Side */}
@@ -213,29 +216,30 @@ const Navbar = () => {
               Ideas
             </Link>
 
-            <Link
-              href="/add-idea"
-              onClick={closeMenu}
-              className="rounded-lg px-4 py-3 text-sm hover:bg-gray-100 hover:text-primary dark:text-white dark:hover:bg-gray-900"
-            >
-              Add Idea
-            </Link>
+            {user && (
+              <>
+                <Link
+                  href="/add-idea"
+                  className="text-sm font-medium transition hover:text-primary dark:text-white"
+                >
+                  Add Idea
+                </Link>
 
-            <Link
-              href="/my-ideas"
-              onClick={closeMenu}
-              className="rounded-lg px-4 py-3 text-sm hover:bg-gray-100 hover:text-primary dark:text-white dark:hover:bg-gray-900"
-            >
-              My Ideas
-            </Link>
+                <Link
+                  href="/my-ideas"
+                  className="text-sm font-medium transition hover:text-primary dark:text-white"
+                >
+                  My Ideas
+                </Link>
 
-            <Link
-              href="/my-interactions"
-              onClick={closeMenu}
-              className="rounded-lg px-4 py-3 text-sm hover:bg-gray-100 hover:text-primary dark:text-white dark:hover:bg-gray-900"
-            >
-              My Interactions
-            </Link>
+                <Link
+                  href="/my-interactions"
+                  className="text-sm font-medium transition hover:text-primary dark:text-white"
+                >
+                  My Interactions
+                </Link>
+              </>
+            )}
 
             {/* Mobile Login/Register */}
             {!user && (
