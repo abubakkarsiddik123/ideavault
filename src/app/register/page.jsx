@@ -17,6 +17,9 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {
+  const searchParams = useSearchParams();
+
+  const redirect = searchParams.get("redirect") || "/";
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -40,7 +43,7 @@ const RegisterPage = () => {
   const handleGoogleSignin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirect,
     });
   };
 

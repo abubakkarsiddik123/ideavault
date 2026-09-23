@@ -49,7 +49,7 @@ const LoginPage = () => {
   const handleGoogleSignin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirect,
     });
   };
 
