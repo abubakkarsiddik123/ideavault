@@ -13,7 +13,7 @@ import {
   TextField,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 const RegisterPage = () => {
