@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
   const token = tokenResult?.token;
 
   const res = await fetch(
-    `http://localhost:8080/idea/${id}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const IdeaDetailsPage = async ({ params }) => {
 
   console.log(token, "token");
 
-  const res = await fetch(`http://localhost:8080/idea/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },

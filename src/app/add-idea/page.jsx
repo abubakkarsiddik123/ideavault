@@ -24,7 +24,7 @@ const AddIdeaPage = () => {
 
     console.log(ideaData, "ideaData");
 
-    const res = await fetch("http://localhost:8080/idea", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

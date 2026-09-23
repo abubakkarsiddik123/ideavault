@@ -11,7 +11,7 @@ const Comment = async ({ ideaId }) => {
 
   const currentUserId = session?.user?.id;
 
-  const res = await fetch(`http://localhost:8080/comments/${ideaId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${ideaId}`, {
     cache: "no-store",
   });
 

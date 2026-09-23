@@ -17,7 +17,7 @@ const MyIdeasPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch("http://localhost:8080/my-idea", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-idea`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -16,7 +16,7 @@ const MyInteractionPage = async () => {
 
   const token = tokenResult?.token;
 
-  const res = await fetch("http://localhost:8080/my-comments", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-comments`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

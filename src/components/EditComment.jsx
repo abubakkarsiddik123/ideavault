@@ -30,7 +30,7 @@ const EditCommentPage = ({ commentId, initialComment }) => {
       return;
     }
 
-    const res = await fetch(`http://localhost:8080/comments/${commentId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments/${commentId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

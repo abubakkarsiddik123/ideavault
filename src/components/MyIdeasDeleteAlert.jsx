@@ -9,7 +9,7 @@ export function MyIdeasDeleteAlert({ id }) {
   const handleDelete = async () => {
     const { data } = await authClient.token();
     const token = data?.token;
-    const res = await fetch(`http://localhost:8080/idea/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/idea/${id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

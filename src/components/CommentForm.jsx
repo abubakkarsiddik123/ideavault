@@ -30,7 +30,7 @@ const CommentForm = ({ ideaId }) => {
       comment: comment.trim(),
     };
 
-    const res = await fetch("http://localhost:8080/comments", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const IdeaPage = async ({ searchParams }) => {
   const queryString = query.toString();
 
   const res = await fetch(
-    `http://localhost:8080/idea${queryString ? `?${queryString}` : ""}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/idea${queryString ? `?${queryString}` : ""}`,
     {
       cache: "no-store",
     },
