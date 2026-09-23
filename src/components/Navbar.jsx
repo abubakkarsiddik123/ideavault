@@ -15,11 +15,23 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const handleLogout =async ()=>{
-await authClient.signOut();
-  }
+  const router = useRouter();
+  const handleLogout = async () => {
+    const { error } = await authClient.signOut();
+
+    if (error) {
+      toast.error(error.message || "Logout failed!");
+      return;
+    }
+
+    toast.success("Logged out successfully!");
+
+    router.push("/");
+  };
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -140,7 +152,10 @@ await authClient.signOut();
                     <span>Profile</span>
                   </Link>
 
-                  <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-red-600 transition hover:bg-red-50 dark:hover:bg-red-950">
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-red-600 transition hover:bg-red-50 dark:hover:bg-red-950"
+                  >
                     <FaSignOutAlt className="text-sm" />
                     <span>Logout</span>
                   </button>
@@ -267,7 +282,10 @@ await authClient.signOut();
                   <span>Profile</span>
                 </Link>
 
-                <button onClick={handleLogout} className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950">
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
+                >
                   <FaSignOutAlt />
                   <span>Logout</span>
                 </button>

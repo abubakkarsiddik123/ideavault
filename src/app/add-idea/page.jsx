@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const AddIdeaPage = () => {
   const { data: session } = authClient.useSession();
@@ -11,10 +12,14 @@ const AddIdeaPage = () => {
 
     const formData = new FormData(e.currentTarget);
     const ideasdata = Object.fromEntries(formData.entries());
+    if (!ideasdata.title.trim()) {
+      toast.error("Idea title is required!");
+      return;
+    }
 
     const ideaData = {
       ...ideasdata,
-      userId: user.id,
+      userId: user?.id,
     };
 
     console.log(ideaData, "ideaData");
@@ -27,7 +32,11 @@ const AddIdeaPage = () => {
       body: JSON.stringify(ideaData),
     });
     const data = await res.json();
-    console.log(data, "add-idea data");
+    if (res.ok) {
+      toast.success("Idea added successfully!");
+    } else {
+      toast.error(data.message || "Failed to add idea!");
+    }
   };
 
   return (
@@ -62,6 +71,7 @@ const AddIdeaPage = () => {
               </label>
 
               <input
+                required
                 name="title"
                 type="text"
                 placeholder="Enter your startup idea title"
@@ -76,6 +86,7 @@ const AddIdeaPage = () => {
               </label>
 
               <textarea
+                required
                 name="shortDescription"
                 rows="3"
                 placeholder="Describe your idea in one or two sentences"
@@ -92,6 +103,7 @@ const AddIdeaPage = () => {
                 </label>
 
                 <select
+                  required
                   name="category"
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 dark:border-gray-700 dark:bg-gray-950 dark:text-white"
                 >
@@ -162,6 +174,7 @@ const AddIdeaPage = () => {
               </label>
 
               <input
+                required
                 name="targetAudience"
                 type="text"
                 placeholder="e.g. Students, Small Business Owners"
@@ -176,6 +189,7 @@ const AddIdeaPage = () => {
               </label>
 
               <textarea
+                required
                 name="problemStatement"
                 rows="5"
                 placeholder="What problem does your idea solve?"
@@ -190,6 +204,7 @@ const AddIdeaPage = () => {
               </label>
 
               <textarea
+                required
                 name="proposedSolution"
                 rows="5"
                 placeholder="How will your idea solve the problem?"
@@ -204,6 +219,7 @@ const AddIdeaPage = () => {
               </label>
 
               <textarea
+                required
                 name="description"
                 rows="7"
                 placeholder="Explain your startup idea in detail..."

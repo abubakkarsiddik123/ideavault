@@ -18,12 +18,12 @@ export function MyIdeasDeleteAlert({ id }) {
     });
     const result = await res.json();
 
-    if (!res.ok) {
-      toast.error(result.message || "Failed to delete idea");
-      return;
-    }
-
-    toast.success("Idea deleted successfully");
+     if (res.ok) {
+    toast.success("Idea deleted successfully!");
+    window.location.reload();
+  } else {
+    toast.error(data.message || "Failed to delete idea!");
+  }
     window.location.reload();
   };
 

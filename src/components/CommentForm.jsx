@@ -6,7 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 const CommentForm = ({ ideaId }) => {
-  const router=useRouter();
+  const router = useRouter();
   const [comment, setComment] = useState("");
 
   const handleSubmit = async (e) => {
@@ -41,13 +41,13 @@ const CommentForm = ({ ideaId }) => {
 
     const result = await res.json();
 
-    if (!res.ok) {
-      toast.error(result.message || "Failed to add comment");
-      return;
+    if (res.ok) {
+      toast.success("Comment added successfully!");
+      setComment("");
+    } else {
+      toast.error(result.message || "Failed to add comment!");
     }
 
-    toast.success("Comment added successfully");
-    setComment("");
     router.refresh();
   };
 

@@ -43,10 +43,10 @@ const EditCommentPage = ({ commentId, initialComment }) => {
 
     const result = await res.json();
 
-    if (!res.ok) {
-      toast.error(result.message || "Failed to update comment");
-      setLoading(false);
-      return;
+    if (res.ok) {
+      toast.success("Comment updated successfully!");
+    } else {
+      toast.error(data.message || "Failed to update comment!");
     }
 
     toast.success("Comment updated successfully");

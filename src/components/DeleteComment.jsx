@@ -27,12 +27,11 @@ const DeleteComment = ({ commentId }) => {
 
     const result = await res.json();
 
-    if (!res.ok) {
-      toast.error(result.message || "Failed to delete comment");
-      return;
+    if (res.ok) {
+      toast.success("Comment deleted successfully!");
+    } else {
+      toast.error(data.message || "Failed to delete comment!");
     }
-
-    toast.success("Comment deleted successfully");
 
     router.refresh();
   };

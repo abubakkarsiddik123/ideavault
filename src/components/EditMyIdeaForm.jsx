@@ -45,12 +45,11 @@ export default function EditMyIdeaForm({ idea }) {
 
     const result = await res.json();
 
-    if (!res.ok) {
-      toast.error(result.message || "Failed to update idea");
-      return;
+    if (res.ok) {
+      toast.success("Idea updated successfully!");
+    } else {
+      toast.error(data.message || "Failed to update idea!");
     }
-
-    toast.success("Idea updated successfully");
   };
   return (
     <Modal>
